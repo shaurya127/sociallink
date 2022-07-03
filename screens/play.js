@@ -46,9 +46,9 @@ const {height,width} = Dimensions.get('screen')
 const Play = () => {
   return (
     <View style={{flex:1}}>
-        <StatusBar backgroundColor={'#FF0B55'} />
+        <StatusBar backgroundColor={'black'} />
       <LinearGradient
-  colors={['#FF0B55', '#FB400E']}
+    colors={['#0099FF', '#A033FF','#FF5280','#FF7061']}
   style={{
     height:height*.18,
     width,

@@ -14,7 +14,7 @@ const Empty_inbox = ()=>{
       <View style={{flexGrow:1}}/>
       <View style={{width:height*.15,flexDirection:'row',justifyContent:'flex-end'}}>
       <LinearGradient
-        colors={ ['#FF0B55', '#FB400E']}
+        colors={ ['#0099FF', '#A033FF','#FF5280','#FF7061']}
         style={{
           height:30,
           width:30,
@@ -35,15 +35,21 @@ const Empty_inbox = ()=>{
         </LinearGradient>
         </View>
       </View>
-
-      <Text style={{marginTop:40,color:'#98A2B3',fontSize:15}}>
+          
+      <Text style={{marginTop:40,color:'#98A2B3',fontSize:15,marginBottom:60}}>
         Your inbox is empty
       </Text>
-      <Pressable style={{backgroundColor:'black',width:width*.9,borderRadius:50,height:height*.065,marginTop:height*.2,justifyContent:'center',alignItems:'center'}}>
-        <Text style={{color:'white',fontWeight:'700',fontSize:17}}>
-          Get Messages
-        </Text>
-      </Pressable>
+      <LinearGradient
+              colors={['#0099FF', '#A033FF', '#FF5280', '#FF7061']}
+              style={{
+                padding: 10,
+                width: 311,
+                height: 58,
+                borderRadius: 100,
+                top: 19,
+              }}>
+              <Text style={{fontSize:20,fontWeight:'700',color:'#FFFFFF',display:'flex',alignItems:'center',lineHeight:24,marginLeft:'auto',marginRight:'auto',top:10}}> Get Messages</Text>
+            </LinearGradient>
     </View>
 
     </View>
@@ -51,7 +57,7 @@ const Empty_inbox = ()=>{
 }
 
 const Messages = ()=>{
-  const data = [{'test':1,'color':true},{'test':2,'color':true},{'test':3,'color':true},{'test':4,'color':true},{'test':5,'color':true},{'test':6},{'test':7},{'test':8},{'test':9},{'test':10},{'test':11},{'test':12}]
+  const data = [{'test':1,'color':true},{'test':2,'color':true},{'test':3,'color':true},{'test':4,'color':true},{'test':5,'color':true},{'test':6,'color':true}]
   return (
     <View>
     <Text style={{fontSize:12,fontWeight:'500',color:'#98A2B3'}}>10 Messages</Text>
@@ -61,7 +67,7 @@ const Messages = ()=>{
        data={data}
        renderItem={({item})=>
         <LinearGradient
-        colors={item.color ? ['#FF0B55', '#FB400E']:['#D0D5DD','#D0D5DD']}
+        colors={item.color ? ['#0099FF', '#A033FF','#FF5280','#FF7061']:['#FF5280','#FF7061','#0099FF', '#A033FF']}
         style={{
           height:width*.26,
           width:width*.26,
@@ -89,7 +95,8 @@ const Inbox = () => {
     <View style={{flex:1,padding:15}}>
       
 
-      <Messages/>
+    <Messages/>
+      {/* <Empty_inbox/> */}
     </View>
   )
 }
