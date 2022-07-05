@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "390828417450",
+    "project_id": "mindful-audio-337108",
+    "storage_bucket": "mindful-audio-337108.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390828417450:android:17d3a57d3921ffda8b8bd3",
+        "android_client_info": {
+          "package_name": "au.com.sociallink"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390828417450-gnb7tvqrl1559lql0sh3ai6rjj00qi90.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNesMfROti386xYt1E2hsedMQRirrENBE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390828417450-gnb7tvqrl1559lql0sh3ai6rjj00qi90.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

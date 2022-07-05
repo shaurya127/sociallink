@@ -1,5 +1,5 @@
 
-package com.instauidesign;
+package au.com.sociallink;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

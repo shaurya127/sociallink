@@ -1,4 +1,4 @@
-package com.instauidesign.newarchitecture;
+package au.com.sociallink.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.instauidesign.BuildConfig;
-import com.instauidesign.newarchitecture.components.MainComponentsRegistry;
-import com.instauidesign.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import au.com.sociallink.BuildConfig;
+import au.com.sociallink.newarchitecture.components.MainComponentsRegistry;
+import au.com.sociallink.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

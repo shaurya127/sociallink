@@ -1,4 +1,4 @@
-package com.instauidesign.newarchitecture.modules;
+package au.com.sociallink.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

@@ -1,4 +1,4 @@
-package com.instauidesign.newarchitecture.components;
+package au.com.sociallink.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
