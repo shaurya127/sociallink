@@ -13,13 +13,13 @@ admin.initializeApp({
 
 
 app.post('/alert',(req,res)=>{
-    console.log(req.body)
+    console.log(req.body.tokan)
     const message ={
         notification:{
             title:'New message',
             body:'You have recieved new message'
         },
-        token: req.body.token
+        token: req.body.tokan
     }
     admin.messaging().send(message).then((t)=>{
         console.log('send sucess')

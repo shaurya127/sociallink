@@ -8,25 +8,32 @@ import {
   Image
   
 } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from 'react-native-vector-icons/Icon';
-
+import messaging from '@react-native-firebase/messaging';
 const {height, width} = Dimensions.get('window');
 const Play_tab = () => {
+  const [my_token,settokan] = useState()
+
+  useEffect(()=>{
+    messaging().getToken().then(t=>{
+     
+      settokan(t)
+    })
+  },[])
 
   const send_msg = async ()=>{
     try {
       console.log('start alerting')
-      const response = await fetch('https://834d-2409-4055-202-875b-9cea-aa33-bcb8-4d9d.ngrok.io/alert', {
+      const response = await fetch('https://1559-2409-4055-202-875b-81-c377-293d-1245.ngrok.io/alert', {
         method: 'post',
         headers: {
           
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          firstParam: 'yourValue',
-          secondParam: 'yourOtherValue'
+         'tokan':my_token
         })
       })
 
