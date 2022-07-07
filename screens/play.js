@@ -22,7 +22,7 @@ function MyTabs({user}) {
         tabBarItemStyle:{flexDirection:'row',alignItems:'center'}
       }}
     >
-      <Tab.Screen name="Play" component={Play_tab} options={{ tabBarLabel: '',    tabBarIcon: ({focused})=> 
+      <Tab.Screen name="Play"  component={Play_tab} options={{ tabBarLabel: '',    tabBarIcon: ({focused})=> 
       <View style={{flexDirection:'row',alignItems:'center',width:width*.4}}>
         <Icons name='ios-arrow-redo-sharp' size={18} color={focused ?'#FF0B55':'#98A2B3'}  />
         <Text style={{color:focused ?'#FF0B55':'#98A2B3',marginLeft:5}}>
