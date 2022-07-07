@@ -1,10 +1,44 @@
-import { View, Text,Dimensions ,StatusBar,Pressable,TextInput} from 'react-native'
-import React from 'react'
+import { View, Text,Dimensions ,StatusBar,Pressable,TextInput,Alert} from 'react-native'
+import React, { useEffect, useState } from 'react'
 import LinearGradient from 'react-native-linear-gradient';
+import firestore from '@react-native-firebase/firestore';
+import { useNavigation } from '@react-navigation/native';
+import messaging from '@react-native-firebase/messaging';
 
+
+
+const store_username = async(user,navigation,my_token)=>{
+  
+
+  const is_user = await firestore().collection('userdata').doc(user).get();
+ if(!is_user.exists){
+  await firestore()
+  .collection('userdata')
+  .doc(user)
+  .set({'user':user,
+     'message':[],
+     'token':my_token
+       
+})
+  
+ }
+ navigation.navigate('play',{user})
+}
 
 const {height,width} = Dimensions.get('screen')
-const Username = () => {
+const Username = ({navigation}) => {
+  const [username,setusername] = useState()
+  const [my_token,settokan] = useState()
+  
+  useEffect(()=>{
+    messaging().getToken().then(t=>{
+     
+      settokan(t)
+    })
+  },[])
+ 
+  
+  
   return (
     <View style={{flex:1}}>
       <StatusBar backgroundColor={'#FF0B55'} />
@@ -33,13 +67,15 @@ const Username = () => {
       </View>
 
       <Pressable style={{backgroundColor:'white',borderRadius:50,width:width*.8,height:53,alignItems:'center',justifyContent:'center',marginTop:19}} >
-  <TextInput placeholderTextColor={'#9EA8B1'} placeholder='@' style={{color:'black',fontWeight:'600',fontSize:16,textAlign:'center',width:width*.6
+  <TextInput value={username} onChangeText={(t)=>setusername(t)} placeholderTextColor={'#9EA8B1'} placeholder='@' style={{color:'black',fontWeight:'600',fontSize:16,textAlign:'center',width:width*.6
 }}>
   
   </TextInput>
 </Pressable>
 
-<Pressable style={{backgroundColor:'black',borderRadius:50,width:width*.8,height:53,alignItems:'center',justifyContent:'center',marginTop:19}} >
+<Pressable onPress={username ?()=> {
+  store_username(username,navigation,my_token)
+  }:()=>Alert.alert('Error','Please Fill your instagram username')} style={{backgroundColor:'black',borderRadius:50,width:width*.8,height:53,alignItems:'center',justifyContent:'center',marginTop:19}} >
   <Text style={{color:'#FFFFFF',fontWeight:'700'
 }}>
    Continue
