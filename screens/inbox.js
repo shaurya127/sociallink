@@ -1,7 +1,9 @@
-import { View, Text, FlatList,Dimensions, Pressable } from 'react-native'
-import React from 'react'
+import { View, Text, FlatList,Dimensions, Pressable,Alert } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import LinearGradient from 'react-native-linear-gradient';
 import MaterialCommunityIcons from 'react-native-vector-icons/Entypo'
+import firestore from '@react-native-firebase/firestore';
+
 const {height,width} = Dimensions.get('window')
 
 
@@ -56,46 +58,68 @@ const Empty_inbox = ()=>{
   )
 }
 
-const Messages = ()=>{
+const Messages = ({user})=>{
+  const [messages,setmessagess] = useState([])
+  console.log(user)
+  useEffect(() => {
+    const subscriber = firestore()
+      .collection('userdata')
+      .doc(user)
+      .onSnapshot(documentSnapshot => {
+        console.log('User data: ', documentSnapshot.data());
+        const msg = documentSnapshot.data()
+        setmessagess( msg.message ?  msg.message:[])
+      });
+
+    // Stop listening for updates when no longer required
+    return () => subscriber();
+  }, []);
   const data = [{'test':1,'color':true},{'test':2,'color':true},{'test':3,'color':true},{'test':4,'color':true},{'test':5,'color':true},{'test':6,'color':true}]
   return (
     <View>
-    <Text style={{fontSize:12,fontWeight:'500',color:'#98A2B3'}}>10 Messages</Text>
+    <Text style={{fontSize:12,fontWeight:'500',color:'#98A2B3'}}>{messages.length} Messages</Text>
 
       <FlatList
       numColumns={3}
-       data={data}
-       renderItem={({item})=>
-        <LinearGradient
-        colors={item.color ? ['#0099FF', '#A033FF','#FF5280','#FF7061']:['#FF5280','#FF7061','#0099FF', '#A033FF']}
-        style={{
-          height:width*.26,
-          width:width*.26,
-          margin:10,
-          justifyContent:'center',
-          alignItems:'center',
-          borderRadius:8
-          }}
-         
-        
-        >
-<MaterialCommunityIcons name='mail-with-circle' size={60} color={'white'} />
-          </LinearGradient>
-        
-        }
+       data={messages}
+       extraData={messages}
+       renderItem={({item,index})=>{
+        console.log(item)
+        return(
+          <Pressable onPress={()=>{Alert.alert('Message',messages[index])}}>
+          <LinearGradient
+          colors={ ['#0099FF', '#A033FF','#FF5280','#FF7061']}
+          style={{
+            height:width*.26,
+            width:width*.26,
+            margin:10,
+            justifyContent:'center',
+            alignItems:'center',
+            borderRadius:8
+            }}
+           
+          
+          >
+  <MaterialCommunityIcons name='mail-with-circle' size={60} color={'white'} />
+            </LinearGradient>
+          
+            </Pressable>
+        )
+       }
+               }
        /> 
 
 </View>
 
   )
 }
-const Inbox = () => {
- 
+const Inbox = ({route}) => {
+  const {user}= route.params
   return (
     <View style={{flex:1,padding:15}}>
       
 
-    <Messages/>
+    <Messages user= {user}/>
       {/* <Empty_inbox/> */}
     </View>
   )

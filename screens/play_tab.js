@@ -8,12 +8,38 @@ import {
   Image
   
 } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from 'react-native-vector-icons/Icon';
 
 const {height, width} = Dimensions.get('window');
 const Play_tab = () => {
+
+  const send_msg = async ()=>{
+    try {
+      console.log('start alerting')
+      const response = await fetch('https://834d-2409-4055-202-875b-9cea-aa33-bcb8-4d9d.ngrok.io/alert', {
+        method: 'post',
+        headers: {
+          
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          firstParam: 'yourValue',
+          secondParam: 'yourOtherValue'
+        })
+      })
+
+      const json = await response.json()
+      console.log(json)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(()=>{
+    send_msg()
+  },[])
   return (
     <View style={{flex: 1}}>
       <View style={{alignItems: 'center'}}>

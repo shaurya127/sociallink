@@ -1,4 +1,4 @@
-import { View, Text,Dimensions,StatusBar } from 'react-native'
+import { View, Text,Dimensions,StatusBar, Pressable } from 'react-native'
 import React from 'react'
 import LinearGradient from 'react-native-linear-gradient';
 import Icons from 'react-native-vector-icons/Ionicons'
@@ -8,7 +8,8 @@ import Inbox from './inbox';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 const Tab = createMaterialTopTabNavigator();
 
-function MyTabs() {
+function MyTabs({user}) {
+
   return (
     <Tab.Navigator
     screenOptions={{
@@ -31,7 +32,9 @@ function MyTabs() {
         }} />
       
      
-      <Tab.Screen name="Inbox" component={Inbox} options={{  tabBarShowLabel:'true' , tabBarIcon: ({focused})=> 
+      <Tab.Screen name="Inbox"initialParams={{
+        'user':user
+      }} component={Inbox} options={{  tabBarShowLabel:'true' , tabBarIcon: ({focused})=> 
       <View style={{flexDirection:'row',alignItems:'center',width:width*.4}}>
       <MaterialCommunityIcons name='email' size={18} color={focused ?'#FF0B55':'#98A2B3'} style={{justifyContent:'center',alignSelf:'center',}} />
        <Text style={{color:focused ?'#FF0B55':'#98A2B3',marginLeft:5}}>
@@ -43,7 +46,9 @@ function MyTabs() {
   );
 }
 const {height,width} = Dimensions.get('screen')
-const Play = () => {
+const Play = ({route,navigation}) => {
+const {user} = route.params
+
   return (
     <View style={{flex:1}}>
         <StatusBar backgroundColor={'black'} />
@@ -61,10 +66,13 @@ const Play = () => {
   >
   <View style={{flexDirection:'row',width:width,paddingHorizontal:16,justifyContent:'space-between',marginTop:12}} >
  
+ <Pressable onPress={()=>{
+     navigation.navigate('setting')
+ }}>
  <View style={{borderRadius:40, height:40,width:40, backgroundColor:'rgba(255, 255, 255, 0.2)',alignItems:'center',justifyContent:'center'}}>
  <Icons name='md-settings-sharp' size={30} color={'white'}  />
  </View>
-
+ </Pressable>
  <View style={{flexDirection:'row'}}>
  <View style={{borderRadius:40, height:40,width:40, backgroundColor:'rgba(255, 255, 255, 0.2)',alignItems:'center',justifyContent:'center'}}>
  <Icons name='notifications' size={30} color={'white'}  />
@@ -102,7 +110,7 @@ Send me anonymous messages!
 
   </LinearGradient>
 
-<MyTabs/>
+<MyTabs user={user}/>
     </View>
   )
 }
