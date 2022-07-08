@@ -1,8 +1,9 @@
 
 const admin = require("firebase-admin");
 const express = require('express')
+const cors = require('cors');
 const app = express()
-
+app.use(cors());
 var serviceAccount = require("./mindful-audio-337108-firebase-adminsdk-z6vij-072b95721d.json");
 app.use(express.json())
 
@@ -13,7 +14,7 @@ admin.initializeApp({
 
 
 app.post('/alert',(req,res)=>{
-    console.log(req.body.tokan)
+    console.log(req.body)
     const message ={
         notification:{
             title:'New message',
@@ -33,8 +34,8 @@ app.post('/alert',(req,res)=>{
 })
 
 
-app.listen(3000,()=>{
-    console.log('server running')
+app.listen(8080,()=>{
+    console.log('server running 8080')
 })
 
 

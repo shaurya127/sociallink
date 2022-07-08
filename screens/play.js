@@ -8,7 +8,7 @@ import Inbox from './inbox';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 const Tab = createMaterialTopTabNavigator();
 
-function MyTabs({user}) {
+function MyTabs({user,tokan}) {
 
   return (
     <Tab.Navigator
@@ -22,7 +22,9 @@ function MyTabs({user}) {
         tabBarItemStyle:{flexDirection:'row',alignItems:'center'}
       }}
     >
-      <Tab.Screen name="Play"  component={Play_tab} options={{ tabBarLabel: '',    tabBarIcon: ({focused})=> 
+      <Tab.Screen name="Play" initialParams={{
+        'tokan':tokan
+      }} component={Play_tab} options={{ tabBarLabel: '',    tabBarIcon: ({focused})=> 
       <View style={{flexDirection:'row',alignItems:'center',width:width*.4}}>
         <Icons name='ios-arrow-redo-sharp' size={18} color={focused ?'#FF0B55':'#98A2B3'}  />
         <Text style={{color:focused ?'#FF0B55':'#98A2B3',marginLeft:5}}>
@@ -33,7 +35,7 @@ function MyTabs({user}) {
       
      
       <Tab.Screen name="Inbox"initialParams={{
-        'user':user
+        'user':user,tokan:tokan
       }} component={Inbox} options={{  tabBarShowLabel:'true' , tabBarIcon: ({focused})=> 
       <View style={{flexDirection:'row',alignItems:'center',width:width*.4}}>
       <MaterialCommunityIcons name='email' size={18} color={focused ?'#FF0B55':'#98A2B3'} style={{justifyContent:'center',alignSelf:'center',}} />
@@ -47,7 +49,7 @@ function MyTabs({user}) {
 }
 const {height,width} = Dimensions.get('screen')
 const Play = ({route,navigation}) => {
-const {user} = route.params
+const {user,my_token} = route.params
 
   return (
     <View style={{flex:1}}>
@@ -110,7 +112,7 @@ Send me anonymous messages!
 
   </LinearGradient>
 
-<MyTabs user={user}/>
+<MyTabs user={user} tokan={my_token}/>
     </View>
   )
 }

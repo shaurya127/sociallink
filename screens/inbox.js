@@ -58,7 +58,7 @@ const Empty_inbox = ()=>{
   )
 }
 
-const Messages = ({user})=>{
+const Messages = ({user,tokan})=>{
   const [messages,setmessagess] = useState([])
   console.log(user)
   useEffect(() => {

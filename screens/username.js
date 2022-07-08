@@ -22,7 +22,7 @@ const store_username = async(user,navigation,my_token)=>{
 })
   
  }
- navigation.navigate('play',{user})
+ navigation.navigate('play',{user,my_token})
 }
 
 const {height,width} = Dimensions.get('screen')
