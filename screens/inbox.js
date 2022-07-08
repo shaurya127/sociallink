@@ -67,8 +67,10 @@ const Messages = ({user,tokan})=>{
       .doc(user)
       .onSnapshot(documentSnapshot => {
         console.log('User data: ', documentSnapshot.data());
+       
         const msg = documentSnapshot.data()
-        setmessagess( msg.message ?  msg.message:[])
+        console.log(msg)
+        setmessagess( msg.message )
       });
 
     // Stop listening for updates when no longer required

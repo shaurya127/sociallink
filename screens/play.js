@@ -1,5 +1,5 @@
-import { View, Text,Dimensions,StatusBar, Pressable } from 'react-native'
-import React from 'react'
+import { View, Text,Dimensions,StatusBar, Pressable ,BackHandler,Alert} from 'react-native'
+import React,{useEffect}from 'react'
 import LinearGradient from 'react-native-linear-gradient';
 import Icons from 'react-native-vector-icons/Ionicons'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -50,7 +50,27 @@ function MyTabs({user,tokan}) {
 const {height,width} = Dimensions.get('screen')
 const Play = ({route,navigation}) => {
 const {user,my_token} = route.params
+console.log(route.params)
+useEffect(() => {
+  const backAction = () => {
+    Alert.alert("Hold on!", "Are you sure you want to go back?", [
+      {
+        text: "Cancel",
+        onPress: () => null,
+        style: "cancel"
+      },
+      { text: "YES", onPress: () => BackHandler.exitApp() }
+    ]);
+    return true;
+  };
 
+  const backHandler = BackHandler.addEventListener(
+    "hardwareBackPress",
+    backAction
+  );
+
+  return () => backHandler.remove();
+}, []);
   return (
     <View style={{flex:1}}>
         <StatusBar backgroundColor={'black'} />
