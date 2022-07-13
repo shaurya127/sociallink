@@ -1,10 +1,28 @@
-import { View, Text,Dimensions } from 'react-native'
+import { View, Text,Dimensions, Button } from 'react-native'
 import React from 'react'
 import Icons from 'react-native-vector-icons/Ionicons'
 import LinearGradient from 'react-native-linear-gradient'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const {height,width} = Dimensions.get('window')
-const Setting = () => {
+const Setting = ({navigation}) => {
+
+  // clear AsyncStorage
+
+  const clearAsyncStorage = async () => {
+    try {
+      await AsyncStorage.clear();
+      // show a alert if clear success
+     if(AsyncStorage.getItem('userdata')==null){
+      alert('clear success')
+     }
+
+    } catch (e) {
+      console.log(e)
+      // clear error
+    }
+  }
+
   return (
     <View style={{flex:1}}>
         <View style={{backgroundColor:'white'}}>
@@ -246,17 +264,35 @@ Privacy policy
           >
         <Icons name='arrow-back' color={'white'} size={18}/>
             </LinearGradient>
-       <Text style={{
+            
+            {/* <Button title='Logout' onPress={()=>{
+                clearAsyncStorage();
+                // redirect to username screen
+                navigation.navigate('username');
+            }
+            }
+            /> */}
+            
+
+       <Text  style={{
         marginLeft:10,
         color:'#344054',
         fontWeight:'500',
-        }}>
+        }} onPress={()=>{
+          clearAsyncStorage();
+          // redirect to username screen
+          navigation.navigate('username');
+      }}>
        Log out
        </Text>
        </View>
 
        <View>
-        <Icons name='chevron-forward' size={24} />
+        <Icons name='chevron-forward' size={24}  onPress={()=>{
+                clearAsyncStorage();
+                // redirect to username screen
+                navigation.navigate('username');
+            }}/>
        </View>
     </View>
 </View> 

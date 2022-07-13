@@ -59,8 +59,8 @@ const Empty_inbox = ()=>{
 }
 
 const Messages = ({user,tokan})=>{
-  const [messages,setmessagess] = useState([])
-  console.log(user)
+  const [messages,setmessages] = useState([])
+  // console.log(user)
   useEffect(() => {
     const subscriber = firestore()
       .collection('userdata')
@@ -70,18 +70,17 @@ const Messages = ({user,tokan})=>{
        
         const msg = documentSnapshot.data()
         console.log(msg)
-        setmessagess( msg.message )
+        setmessages( msg.messages )
       });
 
     // Stop listening for updates when no longer required
     return () => subscriber();
   }, []);
+  console.log(messages);
   const data = [{'test':1,'color':true},{'test':2,'color':true},{'test':3,'color':true},{'test':4,'color':true},{'test':5,'color':true},{'test':6,'color':true}]
   return (
     <View>
-    <Text style={{fontSize:12,fontWeight:'500',color:'#98A2B3'}}>{messages.length} Messages</Text>
-
-      <FlatList
+      {messages!=null ? <FlatList
       numColumns={3}
        data={messages}
        extraData={messages}
@@ -109,8 +108,11 @@ const Messages = ({user,tokan})=>{
         )
        }
                }
-       /> 
+       /> :<Text style={{fontSize:12,fontWeight:'500',color:'#98A2B3'}}>{messages &&  messages.length} Messages</Text>
+}
+   
 
+      
 </View>
 
   )

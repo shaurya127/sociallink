@@ -6,14 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
 const store_username = async(user,navigation,my_token)=>{
   
-
-
- 
-
-
 
 const storeData = async (value) => {
   try {
@@ -53,7 +47,7 @@ const Username = ({navigation}) => {
     try {
       const jsonValue = await AsyncStorage.getItem('insta-id')
       const value = JSON.parse(jsonValue)
-      console.log(jsonValue)
+      // console.log(jsonValue)
      if(jsonValue){
       navigation.navigate('play',{
         'user':value.user,

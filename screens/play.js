@@ -9,7 +9,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 const Tab = createMaterialTopTabNavigator();
 
 function MyTabs({user,tokan}) {
-
+    
   return (
     <Tab.Navigator
     screenOptions={{
@@ -23,7 +23,7 @@ function MyTabs({user,tokan}) {
       }}
     >
       <Tab.Screen name="Play" initialParams={{
-        'tokan':tokan
+        'user':user,tokan:tokan
       }} component={Play_tab} options={{ tabBarLabel: '',    tabBarIcon: ({focused})=> 
       <View style={{flexDirection:'row',alignItems:'center',width:width*.4}}>
         <Icons name='ios-arrow-redo-sharp' size={18} color={focused ?'#FF0B55':'#98A2B3'}  />
@@ -49,8 +49,9 @@ function MyTabs({user,tokan}) {
 }
 const {height,width} = Dimensions.get('screen')
 const Play = ({route,navigation}) => {
-const {user,my_token} = route.params
-console.log(route.params)
+const {user,my_token} = route.params;
+    
+
 useEffect(() => {
   const backAction = () => {
     Alert.alert("Hold on!", "Are you sure you want to go back?", [

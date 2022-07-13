@@ -5,27 +5,38 @@ import {
   Dimensions,
   TextInput,
   Button,
-  Image
-  
+  Image,
 } from 'react-native';
+import { Linking } from 'react-native';
 import React, { useEffect,useState } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from 'react-native-vector-icons/Icon';
 import messaging from '@react-native-firebase/messaging';
+import firestore from '@react-native-firebase/firestore';
 const {height, width} = Dimensions.get('window');
-const Play_tab = () => {
-  const [my_token,settokan] = useState()
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const Play_tab = ({route,navigation}) => {
+  const [my_token,settokan] = useState();
+    const {user} = route.params;
+    console.log(route.params.user);
+    
+  const url="nocapp.link";
 
   useEffect(()=>{
+    
     messaging().getToken().then(t=>{
-     
       settokan(t)
+      
     })
   },[])
 
+  
+
+  
   const send_msg = async ()=>{
     try {
-      console.log('start alerting')
+     
       const response = await fetch('https://1559-2409-4055-202-875b-81-c377-293d-1245.ngrok.io/alert', {
         method: 'post',
         headers: {
@@ -38,7 +49,7 @@ const Play_tab = () => {
       })
 
       const json = await response.json()
-      console.log(json)
+      
     } catch (error) {
       console.log(error)
     }
@@ -68,11 +79,10 @@ const Play_tab = () => {
             alignItems: 'center',
             paddingVertical: 2,
           }}>
-          <TextInput
-            placeholder="tre.link/sahil"
-            style={{color: 'red', width: width * .6, fontWeight: '600',}}
-          />
-          <LinearGradient
+         <Text onPress={() => Linking.openURL(`nocapp.link/${user}`)}>{`nocapp.link/${user}`}</Text>
+          
+        </View>
+        <LinearGradient
             colors={['#0099FF', '#A033FF', '#FF5280', '#FF7061']}
             style={{
               height: height * 0.05,
@@ -83,7 +93,6 @@ const Play_tab = () => {
             }}>
             <Text style={{color: 'white', fontWeight: '700'}}>Copy link</Text>
           </LinearGradient>
-        </View>
 
         <View style={{width: width * 0.92, marginTop: 30}}>
           <View style={{flexDirection: 'row'}}>
