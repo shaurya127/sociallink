@@ -25,7 +25,6 @@ const storeData = async (value) => {
   .set({'user':user,
      'message':[],
      'token':my_token
-       
 }
 )
  storeData({
@@ -126,8 +125,6 @@ const Username = ({navigation}) => {
         </Pressable>
          
             </View>
-              
-        
               </LinearGradient>
 
       }
