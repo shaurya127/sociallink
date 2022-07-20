@@ -7,7 +7,7 @@ import firestore from '@react-native-firebase/firestore';
 const {height,width} = Dimensions.get('window')
 
 
-const Empty_inbox = ()=>{
+const Empty_inbox = ({navigation})=>{
   return (
     <View style={{flex:1,padding:15}}>
     <Text style={{fontSize:12,fontWeight:'500',color:'#98A2B3'}}>0 Messages</Text>
@@ -50,7 +50,8 @@ const Empty_inbox = ()=>{
                 borderRadius: 100,
                 top: 19,
               }}>
-              <Text style={{fontSize:20,fontWeight:'700',color:'#FFFFFF',display:'flex',alignItems:'center',lineHeight:24,marginLeft:'auto',marginRight:'auto',top:10}}> Get Messages</Text>
+              <Text style={{fontSize:20,fontWeight:'700',color:'#FFFFFF',display:'flex',alignItems:'center',lineHeight:24,marginLeft:'auto',marginRight:'auto',top:10}} 
+              > Get Messages</Text>
             </LinearGradient>
     </View>
 
@@ -77,6 +78,12 @@ const Messages = ({user,tokan})=>{
     return () => subscriber();
   }, []);
   console.log(messages);
+  {
+    if(messages && messages.length>0){
+      // alert('messages');
+      messages.reverse();
+    }
+  }
   const data = [{'test':1,'color':true},{'test':2,'color':true},{'test':3,'color':true},{'test':4,'color':true},{'test':5,'color':true},{'test':6,'color':true}]
   return (
     <View>
@@ -108,7 +115,7 @@ const Messages = ({user,tokan})=>{
         )
        }
                }
-       /> :<Text style={{fontSize:12,fontWeight:'500',color:'#98A2B3'}}>{messages &&  messages.length} Messages</Text>
+       /> :<Text style={{fontSize:12,fontWeight:'500',color:'#98A2B3'}}>{<Empty_inbox/>}</Text>
 }
    
 
