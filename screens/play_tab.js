@@ -15,8 +15,26 @@ import messaging from '@react-native-firebase/messaging';
 import firestore from '@react-native-firebase/firestore';
 const {height, width} = Dimensions.get('window');
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import Clipboard from '@react-native-clipboard/clipboard';
+import Share from 'react-native-share';
 const Play_tab = ({route,navigation}) => {
+
+
+  
+  const [copiedText, setCopiedText] = useState('');
+
+  const copyToClipboard = () => {
+    Clipboard.setString('hello world');
+  };
+
+  const fetchCopiedText = async () => {
+    const text = await Clipboard.getString();
+    setCopiedText(text);
+  };
+
+
+
+
   const [my_token,settokan] = useState();
     const {user} = route.params;
     console.log(route.params.user);
@@ -32,6 +50,21 @@ const Play_tab = ({route,navigation}) => {
   },[])
 
   
+  const myCustomShare = async() => {
+    const shareOptions = {
+      message: 'nocap is a new way to get trusted and verified information from the public.\n\nDownload nocap from the link below and get started.\n\n'+url,
+      url: `${url}/${user}`,
+      // urls: [files.image1, files.image2]
+    }
+
+    try {
+      const ShareResponse = await Share.open(shareOptions);
+      console.log(JSON.stringify(ShareResponse));
+    } catch(error) {
+      console.log('Error => ', error);
+    }
+  };
+
 
   
   const send_msg = async ()=>{
@@ -91,7 +124,7 @@ const Play_tab = ({route,navigation}) => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Text style={{color: 'white', fontWeight: '700'}}>Copy link</Text>
+            <Text style={{color: 'white', fontWeight: '700'}} selectable={true}>Copy link</Text>
           </LinearGradient>
 
         <View style={{width: width * 0.92, marginTop: 30}}>
@@ -215,7 +248,7 @@ const Play_tab = ({route,navigation}) => {
                 borderRadius: 100,
                 top: 19,
               }}>
-              <Text style={{fontSize:24,fontWeight:'700',color:'#FFFFFF',display:'flex',alignItems:'center',lineHeight:24,marginLeft:'auto',marginRight:'auto',top:10}}> Share!</Text>
+              <Text style={{fontSize:24,fontWeight:'700',color:'#FFFFFF',display:'flex',alignItems:'center',lineHeight:24,marginLeft:'auto',marginRight:'auto',top:10}} onPress={myCustomShare}> Share!</Text>
             </LinearGradient>
                   </View>
           

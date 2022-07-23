@@ -30,7 +30,9 @@ const Setting = ({navigation}) => {
       <View style={{alignItems:'center', flexDirection:'row',justifyContent:'space-between',flexGrow:1}}>
       <View style={{flexDirection:'row'}}>
       
-       <Icons name='chevron-back' size={24} />
+       <Icons name='chevron-back' size={24} onPress={()=>{
+        navigation.goBack();
+       }} />
       <Text style={{marginLeft:24,fontWeight:'500',fontSize:16}}>
         Settings
       </Text>
