@@ -33,7 +33,8 @@
     "react-native-screens": "^3.14.1",
     "react-native-share": "^7.6.6",
     "react-native-tab-view": "^3.1.1",
-    "react-native-vector-icons": "^9.2.0"
+    "react-native-vector-icons": "^9.2.0",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
